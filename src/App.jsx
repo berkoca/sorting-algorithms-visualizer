@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import Items from "./components/Items";
+import Options from "./Components/Options";
+import Settings from "./components/Settings";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [algorithm, setAlgorithm] = useState(null);
+  const [slider, setSlider] = useState("100");
+  const [items, setItems] = useState([]);
 
+  const fillItems = (length) => {
+    const newItems = [...Array(parseInt(length)).keys()];
+    setItems(newItems);
+  }
+
+  useEffect(() => {
+    fillItems(100);
+  }, []);
+
+  useEffect(() => {
+    fillItems(slider);
+  }, [slider]);
+  
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <>
+      <Settings algorithm={algorithm} slider={slider} setSlider={setSlider} />
+      <Items items={items} slider={slider} />
+      <Options setAlgorithm={setAlgorithm} />
+    </>
+  );
 }
 
-export default App
+export default App;
