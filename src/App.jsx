@@ -29,37 +29,61 @@ const App = () => {
   };
 
   const selectionSort = async () => {
-    if (items?.length) {
-      setIsSorting(true);
+    setIsSorting(true);
 
-      const array = [...items];
-      const n = array.length;
-      let i, j, min_index;
+    const array = [...items];
+    const n = array.length;
+    let i, j, min_index;
 
-      for (i = 0; i < n - 1; i++) {
-        min_index = i;
+    for (i = 0; i < n - 1; i++) {
+      min_index = i;
 
-        for (j = i + 1; j < n; j++) {
-          if (array[j] < array[min_index]) {
-            min_index = j;
-          }
+      for (j = i + 1; j < n; j++) {
+        if (array[j] < array[min_index]) {
+          min_index = j;
         }
-
-        const temp = array[min_index];
-        array[min_index] = array[i];
-        array[i] = temp;
-
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        setItems([...array]);
       }
 
-      setIsSorting(false);
-      setActiveItem(null);
+      const temp = array[min_index];
+      array[min_index] = array[i];
+      array[i] = temp;
+
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      setItems([...array]);
     }
+
+    setIsSorting(false);
+    setActiveItem(null);
+  };
+
+  const bubbleSort = async () => {
+    setIsSorting(true);
+    
+    const array = [...items];
+
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < array.length - i - 1; j++) {
+        if (array[j + 1] < array[j]) {
+          [array[j + 1], array[j]] = [array[j], array[j + 1]];
+        }
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      setItems([...array]);
+    }
+    
+    setIsSorting(false);
   };
 
   const sortItems = () => {
-    selectionSort();
+    switch (algorithm) {
+      case "Selection Sort":
+        selectionSort();
+        break;
+      case "Bubble Sort":
+        bubbleSort();
+        break;
+    }
   };
 
   useEffect(() => {

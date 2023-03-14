@@ -14,7 +14,7 @@ const Settings = ({ algorithm, slider, setSlider, randomizeItems, isSorting, sor
           <div>
             <label
               htmlFor="minmax-range"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+              className="block mb-2 text-sm font-medium text-white text-center"
             >
               Items: {slider}
             </label>
@@ -23,9 +23,10 @@ const Settings = ({ algorithm, slider, setSlider, randomizeItems, isSorting, sor
               type="range"
               min="10"
               max="1000"
+              step="5"
               value={slider}
               onChange={(e) => setSlider(e.target.value)}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />
           </div>
         </div>

@@ -1,5 +1,6 @@
 const algorithms = [
-  "Selection Sort"
+  "Selection Sort",
+  "Bubble Sort"
 ];
 
 export default algorithms;
